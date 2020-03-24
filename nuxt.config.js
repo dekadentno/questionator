@@ -1,0 +1,83 @@
+
+export default {
+  mode: 'universal',
+  /*
+  ** Headers of the page
+  */
+  head: {
+    title: process.env.npm_package_name || '',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+    ],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
+  },
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#fff' },
+  /*
+  ** Global CSS
+  */
+  css: [
+    '~assets/scss/style.scss'
+  ],
+  styleResources: {
+    // scss: ['assets/scss/tools/_functions.scss', 'assets/scss/source/_colors.scss', 'assets/scss/source/_variables.scss', 'assets/scss/tools/_mixins.scss']
+    scss: []
+  },
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+  ],
+  /*
+  ** Nuxt.js dev-modules
+  */
+  buildModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module'
+  ],
+  /*
+  ** Nuxt.js modules
+  */
+  modules: [
+    '@nuxtjs/pwa',
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: 'AIzaSyCF9RSGa3_ge8Tv4Dzt9THm9NzXtwlCriQ',
+          authDomain: 'questionator-47b58.firebaseapp.com',
+          databaseURL: 'https://questionator-47b58.firebaseio.com',
+          projectId: 'questionator-47b58',
+          storageBucket: 'questionator-47b58.appspot.com',
+          messagingSenderId: '4153525338',
+          appId: '1:4153525338:web:32873596edc1ebdcf1c463',
+          measurementId: 'G-EVG1BP15C4'
+        },
+        services: {
+          realtimeDb: true,
+          analytics: true
+        // auth: true // Just as example. Can be any other service.
+        }
+      }
+    ]
+  ],
+  /*
+  ** Build configuration
+  */
+  build: {
+    /*
+    ** You can extend webpack config here
+    */
+    extend (config, ctx) {
+    }
+  }
+}
