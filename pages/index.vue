@@ -29,14 +29,12 @@ export default {
   mounted () {
     // GET TOPIC BY ID
     // const db = this.$fireDb.ref('topics').child('-LoC2FhOQiDedkV1BS9Y')
-
     // FETCH ALL TOPICS
     // const db = this.$fireDb.ref('topics')
     // db.once('value').then((snapshot) => {
     //   const topics = Object.values(snapshot.val())
     //   console.log('topics: ', topics);
     // })
-
     // CREATE NEW TOPIC
     // const rootRef = this.$fireDb.ref()
     // const storesRef = rootRef.child('topics')
@@ -46,7 +44,6 @@ export default {
     //   questions: []
     // })
     // console.log('---> ', newStoreRef) // dobivanje keya od kreiranog topica
-
     // ADD QUESTION TO TOPIC BY ID
     // const db = this.$fireDb.ref('topics/-M3CxHFdMyTOKOU4aKsl')
     // const rootRef = this.$fireDb.ref()
@@ -57,7 +54,6 @@ export default {
     //   content: 'najdraza boja?',
     //   votes: 0
     // })
-
     // GET NUMBER OF VOTES (for increment)
     // const db = this.$fireDb.ref('topics/-M3CxHFdMyTOKOU4aKsl/questions/-M3DBN5CRtNT73G_z8Lu')
     // db.once('value').then((snapshot) => {
@@ -79,10 +75,10 @@ export default {
 <style lang="scss" scoped>
 .container {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 .cards-container {
   display: flex;
@@ -128,6 +124,7 @@ export default {
     color: white;
     font-weight: 200;
     letter-spacing: 2px;
+    line-height: 1.8;
     opacity: 0;
     max-height: 0;
     transition: all 0.3s ease;
@@ -136,9 +133,9 @@ export default {
   &:hover {
     height: 270px;
     .card__desc {
-         transition: all 0.3s ease;
-   opacity: 1;
-   max-height:40px;
+      transition: all 0.3s ease;
+      opacity: 1;
+      max-height: 40px;
     }
   }
 }

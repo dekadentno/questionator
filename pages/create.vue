@@ -1,6 +1,6 @@
 <template>
   <div class="create-topic">
-    <input ref="topic" v-model="topic" type="text" class="text-input">
+    <input ref="topic" v-model="topic" placeholder="Topic name..." type="text" class="text-input">
     <div class="actions">
       <button class="btn btn--primary" @click="createTopic">
         create topic

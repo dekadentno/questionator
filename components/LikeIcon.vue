@@ -1,7 +1,7 @@
 <template>
-  <div class="heart-holder">
-    <a data-icon-hook class="like-icon" :class="{ 'start' : selected }" href="#">
-      <svg class="heart-icon start" width="60" height="55" viewBox="0 0 90 85">
+  <div class="heart-holder" @click="handleClick">
+    <div data-icon-hook class="like-icon" :class="{ 'start' : isSelected }">
+      <svg class="heart-icon" width="60" height="55" viewBox="0 0 90 85">
         <path
           class="love"
           fill="none"
@@ -12,7 +12,7 @@
           d="M45.137,23.041c4.912-24.596,40.457-27.775,42.128-0.435c1.398,22.88-21.333,40.717-42.128,50.522 M45.137,23.041 C40.225-1.555,5.057-4.734,3.387,22.606c-1.398,22.88,20.955,40.717,41.75,50.522"
         />
       </svg>
-    </a>
+    </div>
   </div>
 </template>
 
@@ -24,6 +24,20 @@ export default {
       default () {
         return false
       }
+    }
+  },
+  data () {
+    return {
+      isSelected: false
+    }
+  },
+  mounted () {
+    this.isSelected = this.selected
+  },
+  methods: {
+    handleClick () {
+      this.isSelected = !this.isSelected
+      this.$emit('click')
     }
   }
 }
@@ -37,6 +51,7 @@ export default {
   width: 24px;
   // margin-top: 80px;
   transform-origin: bottom;
+  cursor: pointer;
 }
 
 .love {
