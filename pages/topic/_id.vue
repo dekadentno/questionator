@@ -5,9 +5,9 @@
     </template>
     <template v-if="!isError && currentTopic">
       <h2>{{ currentTopic.name }}</h2>
-      <div v-for="(q, key) in currentTopic.questions" :key="key" class="question-card">
+      <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <p>{{ q.content }}</p>
-        <LikeIcon @click="handleClick" />
+        <LikeIcon @click="upvoteQuestion(q)" />
       </div>
       <button title="Post a question" class="btn btn--levitate" @click="openQuestionModal">
         <span>+</span>
@@ -30,6 +30,23 @@ export default {
       isError: false
     }
   },
+  computed: {
+    mappedQuestions () {
+      if (!this.currentTopic || !this.currentTopic.questions) { return [] }
+      const questions = this.currentTopic.questions
+      const mapped = []
+      for (const q in questions) {
+        console.log('q', q)
+        console.log('q', questions[q])
+        mapped.push({
+          id: q,
+          content: questions[q].content,
+          votes: questions[q].votes
+        })
+      }
+      return mapped
+    }
+  },
   async mounted () {
     const topicId = this.$route.params.id
     if (!topicId) { return }
@@ -49,7 +66,14 @@ export default {
   },
   // topic -M3CxHFdMyTOKOU4aKsl
   methods: {
-    handleClick () {},
+    upvoteQuestion (q) {
+      console.log('qq', q)
+      // GET NUMBER OF VOTES (for increment)
+      // const db = this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + q.id)
+      // const response = await db.once('value')
+      // const { votes } = response.val()
+      // console.log('-> ', votes)
+    },
     async openQuestionModal () {
       const q = await prompt('Please enter your question', '')
       if (q) {
