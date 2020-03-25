@@ -5,7 +5,7 @@
         <path
           class="love"
           fill="none"
-          stroke="#FFFFFF"
+          stroke="#29a19c"
           stroke-width="5"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -52,28 +52,30 @@ export default {
   // margin-top: 80px;
   transform-origin: bottom;
   cursor: pointer;
+  // transition: fill 1s 1s ease;
 }
 
 .love {
-  transition: stroke 1s 1s ease;
+  transition: stroke 1s 1s ease, all 2s ease;
 }
 
 .start .heart-icon {
   animation: heart-beat 1s forwards;
     .love {
-      stroke: #ec6d46;
+      stroke: #29a19c;
+      fill: #29a19c;
     }
 }
 
 @keyframes heart-beat {
   25% {
-    transform: scale(.3);
+    transform: scale(.8);
   }
   50% {
     transform: scale(1);
   }
   75% {
-    transform: scale(.3);
+    transform: scale(.8);
   }
   100% {
     transform: scale(1);

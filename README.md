@@ -45,3 +45,5 @@ As a participant (regular user), I want to be able...
 
 ## Todos
 - cron job for deleting old topics
+- buttons loading state
+- disabled button
