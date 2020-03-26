@@ -45,7 +45,8 @@ export default {
           votes: questions[q].votes
         })
       }
-      return mapped
+
+      return mapped.sort((a, b) => b.votes - a.votes)
     }
   },
   mounted () {
@@ -107,10 +108,6 @@ export default {
         votes: q.votes + 1
       })
       console.log('-', db)
-      // const newStoreRef = db.push()
-      // await newStoreRef.set({
-      //   votes: q.votes + 1
-      // })
     },
     async openQuestionModal () {
       const q = await prompt('Please enter your question', '')
