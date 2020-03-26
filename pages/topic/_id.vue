@@ -10,7 +10,7 @@
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <div class="question-card__content">
           <p>{{ q.content }}</p>
-          <LikeIcon @click="upvoteQuestion(q)" />
+          <LikeIcon :key="key" @click="upvoteQuestion(q)" />
         </div>
         <span class="question-card__votes">
           {{ q.votes }} votes
@@ -54,35 +54,24 @@ export default {
     }
   },
   mounted () {
-    const topicId = this.$route.params.id
-    if (!topicId) { return }
-    this.$fireDb.ref('topics/' + topicId).on('value', (snapshot) => {
-      // console.log('prominejno bokte')
-      if (!snapshot.val()) {
-        this.isError = true
-        setTimeout(() => {
-          this.$router.push('/')
-        }, 3000)
-        return
-      }
-      this.currentTopic = snapshot.val()
-    })
-    // const db = this.$fireDb.ref('topics').child(topicId)
-    // const response = await db.on('value')
-    // if (!response.val()) {
-    //   this.isError = true
-    //   setTimeout(() => {
-    //     this.$router.push('/')
-    //   }, 3000)
-    //   return
-    // }
-    // const topics = Object.values(response.val())
-    // if (topics.length > 0) {
-    //   this.currentTopic = response.val()
-    // }
+    this.fetchQuestions()
   },
-  // topic -M3CxHFdMyTOKOU4aKsl
   methods: {
+    fetchQuestions () {
+      const topicId = this.$route.params.id
+      if (!topicId) { return }
+      this.$fireDb.ref('topics/' + topicId).on('value', (snapshot) => {
+        this.currentTopic = null
+        if (!snapshot.val()) {
+          this.isError = true
+          setTimeout(() => {
+            this.$router.push('/')
+          }, 3000)
+          return
+        }
+        this.currentTopic = snapshot.val()
+      })
+    },
     copyToClipboard () {
       const text = window.location.href
       if (window.clipboardData && window.clipboardData.setData) {
@@ -106,12 +95,9 @@ export default {
       }
     },
     async upvoteQuestion (q) {
-      console.log('votes: ', q.votes, ' for ', q.id)
-      // GET NUMBER OF VOTES (for increment)
-      const db = await this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + q.id).update({
+      await this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + q.id).update({
         votes: q.votes + 1
       })
-      console.log('-', db)
     },
     async openQuestionModal () {
       const q = await prompt('Please enter your question', '')
@@ -123,7 +109,6 @@ export default {
           content: q,
           votes: 0
         })
-        // alert('Your question has been posted successfully. It will need a few moments to appear.')
       }
     }
   }
@@ -151,8 +136,6 @@ export default {
     line-height: 1.4;
     border-radius: 4px;
     width: 70%;
-    // max-width: 620px;
-    // min-width: 400px;
     border: 1px solid #29a19c;
     margin: 30px;
     position: relative;
