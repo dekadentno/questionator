@@ -8,9 +8,13 @@
         {{ currentTopic.name }} <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
       </h2>
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
-        <p>{{ q.content }}</p>
-        {{ q.votes }}
-        <LikeIcon @click="upvoteQuestion(q)" />
+        <div class="question-card__content">
+          <p>{{ q.content }}</p>
+          <LikeIcon @click="upvoteQuestion(q)" />
+        </div>
+        <span class="question-card__votes">
+          {{ q.votes }} votes
+        </span>
       </div>
       <button title="Post a question" class="btn btn--levitate" @click="openQuestionModal">
         <font-awesome-icon title="Post new question" icon="pen-alt" />
@@ -151,13 +155,22 @@ export default {
     // min-width: 400px;
     border: 1px solid #29a19c;
     margin: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    p {
-      max-width: 88%;
-      word-break: break-all;
+      p {
+        max-width: 88%;
+        word-break: break-all;
+      }
+    }
+    &__votes {
+      position: absolute;
+      right: 4px;
+      bottom: 2px;
+
     }
   }
 }
