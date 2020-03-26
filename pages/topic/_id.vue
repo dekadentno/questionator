@@ -9,6 +9,7 @@
       </h2>
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <p>{{ q.content }}</p>
+        {{ q.votes }}
         <LikeIcon @click="upvoteQuestion(q)" />
       </div>
       <button title="Post a question" class="btn btn--levitate" @click="openQuestionModal">
@@ -99,13 +100,17 @@ export default {
         }
       }
     },
-    upvoteQuestion (q) {
-      console.log('qq', q)
+    async upvoteQuestion (q) {
+      console.log('votes: ', q.votes, ' for ', q.id)
       // GET NUMBER OF VOTES (for increment)
-      // const db = this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + q.id)
-      // const response = await db.once('value')
-      // const { votes } = response.val()
-      // console.log('-> ', votes)
+      const db = await this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + q.id).update({
+        votes: q.votes + 1
+      })
+      console.log('-', db)
+      // const newStoreRef = db.push()
+      // await newStoreRef.set({
+      //   votes: q.votes + 1
+      // })
     },
     async openQuestionModal () {
       const q = await prompt('Please enter your question', '')
@@ -117,7 +122,7 @@ export default {
           content: q,
           votes: 0
         })
-        alert('Your question has been posted successfully. It will need a few moments to appear.')
+        // alert('Your question has been posted successfully. It will need a few moments to appear.')
       }
     }
   }

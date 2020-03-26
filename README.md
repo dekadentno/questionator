@@ -1,25 +1,10 @@
-# questionator
+# Questionator
 
-> Question asking app. No registration required.
+> Question asking app. No registration required. Written in Nuxt.js.
 
-## Build Setup
+Color theme used from [here](https://colorhunt.co/palette/163836).
 
-```bash
-# install dependencies
-$ npm install
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
 ## User stories
 
@@ -50,4 +35,5 @@ As a participant (regular user), I want to be able...
 - implement short url
 - as a speaker, to be able to limit number of questions per topic
 - better organize css
+- generate qr for url
 
