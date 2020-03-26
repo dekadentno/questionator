@@ -28,7 +28,7 @@ As a newcomer, I want to be able...
 
 As a speaker, I want to be able...
 - to create a topic and give it a name
-- to give a topic a custom (uniq) name that will be used in url 
+- to give a topic a custom name 
 - to copy the topic url with a click
 - to ask for a short url of my topic url
 - to disable the possibility of upvoating other people's questions
@@ -44,6 +44,8 @@ As a participant (regular user), I want to be able...
 - change the view of the questions (card/table)
 
 ## Todos
+- refactor in vue 3
 - cron job for deleting old topics
 - buttons loading state
 - disabled button
+- switch between card view and compact view

@@ -4,13 +4,15 @@
       Topic doesn't exist. You will be redirrected shortly.
     </template>
     <template v-if="!isError && currentTopic">
-      <h2>{{ currentTopic.name }}</h2>
+      <h2>
+        {{ currentTopic.name }} <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyUrl" />
+      </h2>
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <p>{{ q.content }}</p>
         <LikeIcon @click="upvoteQuestion(q)" />
       </div>
       <button title="Post a question" class="btn btn--levitate" @click="openQuestionModal">
-        <span>+</span>
+        <font-awesome-icon title="Post new question" icon="pen-alt" />
       </button>
     </template>
   </div>
@@ -47,25 +49,39 @@ export default {
       return mapped
     }
   },
-  async mounted () {
+  mounted () {
     const topicId = this.$route.params.id
     if (!topicId) { return }
-    const db = this.$fireDb.ref('topics').child(topicId)
-    const response = await db.once('value')
-    if (!response.val()) {
-      this.isError = true
-      setTimeout(() => {
-        this.$router.push('/')
-      }, 3000)
-      return
-    }
-    const topics = Object.values(response.val())
-    if (topics.length > 0) {
-      this.currentTopic = response.val()
-    }
+    this.$fireDb.ref('topics/' + topicId).on('value', (snapshot) => {
+      // console.log('prominejno bokte')
+      if (!snapshot.val()) {
+        this.isError = true
+        setTimeout(() => {
+          this.$router.push('/')
+        }, 3000)
+        return
+      }
+      this.currentTopic = snapshot.val()
+    })
+    // const db = this.$fireDb.ref('topics').child(topicId)
+    // const response = await db.on('value')
+    // if (!response.val()) {
+    //   this.isError = true
+    //   setTimeout(() => {
+    //     this.$router.push('/')
+    //   }, 3000)
+    //   return
+    // }
+    // const topics = Object.values(response.val())
+    // if (topics.length > 0) {
+    //   this.currentTopic = response.val()
+    // }
   },
   // topic -M3CxHFdMyTOKOU4aKsl
   methods: {
+    copyUrl () {
+      console.log('copy url!')
+    },
     upvoteQuestion (q) {
       console.log('qq', q)
       // GET NUMBER OF VOTES (for increment)
@@ -144,5 +160,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.copy-url {
+  cursor: pointer;
 }
 </style>

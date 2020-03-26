@@ -27,38 +27,11 @@
 export default {
   name: 'QIndex',
   mounted () {
-    // GET TOPIC BY ID
-    // const db = this.$fireDb.ref('topics').child('-LoC2FhOQiDedkV1BS9Y')
     // FETCH ALL TOPICS
     // const db = this.$fireDb.ref('topics')
     // db.once('value').then((snapshot) => {
     //   const topics = Object.values(snapshot.val())
     //   console.log('topics: ', topics);
-    // })
-    // CREATE NEW TOPIC
-    // const rootRef = this.$fireDb.ref()
-    // const storesRef = rootRef.child('topics')
-    // const newStoreRef = storesRef.push()
-    // newStoreRef.set({
-    //   name: 'novi test2',
-    //   questions: []
-    // })
-    // console.log('---> ', newStoreRef) // dobivanje keya od kreiranog topica
-    // ADD QUESTION TO TOPIC BY ID
-    // const db = this.$fireDb.ref('topics/-M3CxHFdMyTOKOU4aKsl')
-    // const rootRef = this.$fireDb.ref()
-    // const storesRef = db.child('questions')
-    // console.log('storerev', storesRef)
-    // const newStoreRef = storesRef.push()
-    // newStoreRef.set({
-    //   content: 'najdraza boja?',
-    //   votes: 0
-    // })
-    // GET NUMBER OF VOTES (for increment)
-    // const db = this.$fireDb.ref('topics/-M3CxHFdMyTOKOU4aKsl/questions/-M3DBN5CRtNT73G_z8Lu')
-    // db.once('value').then((snapshot) => {
-    //   const obj = snapshot.val()
-    //   // console.log('num of votes: ', obj.votes)
     // })
   },
   methods: {
