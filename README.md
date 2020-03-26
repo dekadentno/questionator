@@ -30,18 +30,13 @@ As a speaker, I want to be able...
 - to create a topic and give it a name
 - to give a topic a custom name 
 - to copy the topic url with a click
-- to ask for a short url of my topic url
-- to disable the possibility of upvoating other people's questions
 - to limit the number of questions 
-- to remove questions that are fishy (explicit content)
-- time limit the voting option
 
 As a participant (regular user), I want to be able...
 - to join a topic by name
 - to post my question
 - to upvote other questions
 - not to upvote the same question multiple times
-- change the view of the questions (card/table)
 
 ## Todos
 - refactor in vue 3
@@ -49,3 +44,10 @@ As a participant (regular user), I want to be able...
 - buttons loading state
 - disabled button
 - switch between card view and compact view
+- logo + favicon
+- seo
+- responsive :(
+- implement short url
+- as a speaker, to be able to limit number of questions per topic
+- better organize css
+

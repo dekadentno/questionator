@@ -5,7 +5,7 @@
     </template>
     <template v-if="!isError && currentTopic">
       <h2>
-        {{ currentTopic.name }} <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyUrl" />
+        {{ currentTopic.name }} <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
       </h2>
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <p>{{ q.content }}</p>
@@ -38,8 +38,6 @@ export default {
       const questions = this.currentTopic.questions
       const mapped = []
       for (const q in questions) {
-        console.log('q', q)
-        console.log('q', questions[q])
         mapped.push({
           id: q,
           content: questions[q].content,
@@ -79,8 +77,27 @@ export default {
   },
   // topic -M3CxHFdMyTOKOU4aKsl
   methods: {
-    copyUrl () {
-      console.log('copy url!')
+    copyToClipboard () {
+      const text = window.location.href
+      if (window.clipboardData && window.clipboardData.setData) {
+        // IE specific code path to prevent textarea being shown while dialog is visible.
+        return window.clipboardData.setData('Text', text)
+      } else if (document.queryCommandSupported && document.queryCommandSupported(
+        'copy')) {
+        const textarea = document.createElement('textarea')
+        textarea.textContent = text
+        textarea.style.position = 'fixed' // Prevent scrolling to bottom of page in MS Edge.
+        document.body.appendChild(textarea)
+        textarea.select()
+        try {
+          return document.execCommand('copy') // Security exception may be thrown by some browsers.
+        } catch (err) {
+          this.sayHello('Copy to clipboard failed.', err) // TOAST
+          return false
+        } finally {
+          document.body.removeChild(textarea)
+        }
+      }
     },
     upvoteQuestion (q) {
       console.log('qq', q)
