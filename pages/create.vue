@@ -1,5 +1,5 @@
 <template>
-  <div class="create-topic">
+  <div class="create-topic base-wrap">
     <input ref="topic" v-model="topic" placeholder="Enter your topic name" type="text" class="text-input">
     <div class="actions">
       <button :disabled="!topic" class="btn btn--primary" @click="createTopic">

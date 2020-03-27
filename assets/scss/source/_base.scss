@@ -1,0 +1,21 @@
+// wrapper for grid and items
+.base-wrap {
+  margin: 0 auto;
+  position: relative;
+  max-width: calc-rem(1640px);
+
+  // padding: 0 calc-rem($wrapper-small--padding);
+  @include mq(w480, max) {
+    padding: 0 calc-rem(10px);
+  }
+  @include mq(w640) {
+    padding: 0 calc-rem(40px);
+  }
+  @include mq(w992) {
+    padding: 0 calc-rem(80px);
+  }
+  @include mq(w1920) {
+    padding: 0;
+  }
+}
+
