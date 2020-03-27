@@ -128,13 +128,20 @@ export default {
       })
     },
     async openQuestionModal () {
-      const q = await prompt('Please enter your question', '')
-      if (q) {
+      const result = await this.$swal({
+        title: 'Enter your question',
+        html: '<br/><input type="text" ref="questionRef" class="text-input question-input"/>',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false
+      })
+      const question = document.getElementsByClassName('question-input')[0].value // getting input value like this because we can't use v-model
+      if (result.value && question) { // if clicked OK
         const db = this.$fireDb.ref('topics/' + this.$route.params.id)
         const storesRef = db.child('questions')
         const newStoreRef = storesRef.push()
         newStoreRef.set({
-          content: q,
+          content: question,
           votes: 0
         })
         this.$swal({
@@ -142,7 +149,6 @@ export default {
           position: 'top-end',
           showConfirmButton: false,
           timer: 3000,
-          type: 'success',
           title: 'Success',
           icon: 'success',
           text: 'Question posted!'
