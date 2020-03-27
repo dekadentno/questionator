@@ -113,9 +113,27 @@ export default {
         document.body.appendChild(textarea)
         textarea.select()
         try {
-          return document.execCommand('copy') // Security exception may be thrown by some browsers.
+          const cpy = document.execCommand('copy')
+          this.$swal({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            title: 'Success',
+            icon: 'success',
+            text: 'Copied!'
+          })
+          return cpy
         } catch (err) {
-          this.sayHello('Copy to clipboard failed.', err) // TOAST
+          this.$swal({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            title: 'Error',
+            icon: 'error',
+            text: 'Copy to clipboard failed'
+          })
           return false
         } finally {
           document.body.removeChild(textarea)
