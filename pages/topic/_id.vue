@@ -65,15 +65,14 @@ export default {
       const topicId = this.$route.params.id
       if (!topicId) { return }
       this.$fireDb.ref('topics/' + topicId).on('value', (snapshot) => {
-        this.currentTopic = null
-        if (!snapshot.val()) {
+        if (!snapshot || !snapshot.val()) {
           this.isError = true
           setTimeout(() => {
             this.$router.push('/')
           }, 3000)
-          return
+        } else {
+          this.currentTopic = snapshot.val()
         }
-        this.currentTopic = snapshot.val()
       })
     },
     generateQr () {
