@@ -17,7 +17,8 @@ export default {
   name: 'QCreate',
   data () {
     return {
-      topic: ''
+      topic: '',
+      isLoading: false
     }
   },
   methods: {
@@ -25,6 +26,7 @@ export default {
       this.$router.push('/')
     },
     async createTopic () {
+      this.isLoading = true
       const dbRef = this.$fireDb.ref().child('topics')
       const newStoreRef = dbRef.push()
       await newStoreRef.set({
@@ -32,6 +34,7 @@ export default {
         questions: []
       })
       this.$router.push('/topic/' + newStoreRef.key)
+      this.isLoading = false
     }
   }
 }

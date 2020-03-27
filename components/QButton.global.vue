@@ -41,10 +41,10 @@ export default {
   computed: {
     computedClass () {
       return {
-        disabled: this.disabled,
         'btn--primary': this.type === 'primary',
         'btn--secondary': this.type === 'secondary',
-        'btn--levitate': this.type === 'levitate'
+        'btn--levitate': this.type === 'levitate',
+        'btn--disabled': this.disabled || this.loading
       }
     }
   },
@@ -107,6 +107,11 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  &--disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
   }
 }
 </style>

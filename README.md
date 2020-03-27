@@ -26,15 +26,14 @@ As a participant (regular user), I want to be able...
 
 ## Todos
 
-- buttons loading state
 - better organize css
 - responsive :(
 - disabled upvote button
 - seo
 
 - refactor in vue 3, leave vue 2 implementation in separate branch
-- transition between routes
-- think of a way how to purge old topics
-- logo + favicon (?)
+- transition effects between routes
+- think of a way how to purge old unused topics
+- logo + favicon (what to do here?)
 - switch between card view and compact view
 - functionality to limit number of questions per topic

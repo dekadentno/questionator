@@ -8,7 +8,7 @@
       class="text-input"
     >
     <div class="actions">
-      <QButton @click="joinTopic">
+      <QButton :disabled="!topicId" @click="joinTopic">
         join topic
       </QButton>
       <QButton type="secondary" @click="goHome">
