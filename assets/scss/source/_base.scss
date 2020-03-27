@@ -34,41 +34,6 @@ body {
   }
 }
 
-.btn {
-  padding: 24px 30px;
-  border: none;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.2;
-  border-radius: 4px;
-  text-transform: uppercase;
-  width: 220px;
-
-  &--primary {
-    color: #222831;
-    background: #29a19c;
-
-    &:hover {
-      background: #a3f7bf;
-      transition: background 200ms;
-    }
-  }
-
-  &--secondary {
-    color: #29a19c;
-    border: 1px solid #29a19c;
-    // border-radius: 2px;
-    background: transparent;
-
-    &:hover {
-      background: #a3f7bf;
-      color: #222831;
-      transition: background 200ms, color 200ms;
-    }
-  }
-}
-
 .text-input {
   height: 28px;
   min-width: 440px;

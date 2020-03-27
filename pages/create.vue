@@ -2,12 +2,12 @@
   <div class="create-topic base-wrap">
     <input ref="topic" v-model="topic" placeholder="Enter your topic name" type="text" class="text-input">
     <div class="actions">
-      <button :disabled="!topic" class="btn btn--primary" @click="createTopic">
+      <QButton :disabled="!topic" @click="createTopic">
         create topic
-      </button>
-      <button class="btn btn--secondary" @click="goHome">
-        back
-      </button>
+      </QButton>
+      <QButton type="secondary" @click="goHome">
+        go back
+      </QButton>
     </div>
   </div>
 </template>

@@ -8,12 +8,12 @@
       class="text-input"
     >
     <div class="actions">
-      <button class="btn btn--primary" @click="joinTopic">
+      <QButton @click="joinTopic">
         join topic
-      </button>
-      <button class="btn btn--secondary" @click="goHome">
-        back
-      </button>
+      </QButton>
+      <QButton type="secondary" @click="goHome">
+        go back
+      </QButton>
     </div>
   </div>
 </template>

@@ -18,21 +18,21 @@
           {{ q.votes }} votes
         </span>
       </div>
-      <button title="Post a question" class="btn btn--levitate" @click="openQuestionModal">
+      <QButton type="levitate" @click="openQuestionModal">
         <font-awesome-icon title="Post new question" icon="pen-alt" />
-      </button>
+      </QButton>
     </template>
   </div>
 </template>
 
 <script>
 import QRCode from 'qrcode'
-import LikeIcon from '../../components/LikeIcon'
+// import LikeIcon from '../../components/LikeIcon'
 
 export default {
   name: 'QTopicDetails',
   components: {
-    LikeIcon
+    // LikeIcon
   },
   data () {
     return {
@@ -217,25 +217,6 @@ export default {
 
     }
   }
-}
-
-.btn--levitate {
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.2;
-  background-color: #29a19c;
-  color: #222831;
-  width: 40px;
-  height: 40px;
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .copy-url {
