@@ -19,10 +19,6 @@
 </template>
 
 <script>
-/**
- * check if topic exists
- * if exists, redirect to topicdetails with that id
- */
 export default {
   name: 'QJoin',
   data () {

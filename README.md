@@ -26,7 +26,6 @@ As a participant (regular user), I want to be able...
 
 ## Todos
 
-- better organize css
 - responsive :(
 - disabled upvote button
 - seo
