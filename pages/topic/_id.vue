@@ -5,7 +5,9 @@
     </template>
     <template v-if="!isError && currentTopic">
       <h2>
-        {{ currentTopic.name }} <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
+        {{ currentTopic.name }}
+        <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
+        <font-awesome-icon class="copy-url" title="qr" icon="qrcode" @click="generateQr" />
       </h2>
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <div class="question-card__content">
@@ -24,7 +26,9 @@
 </template>
 
 <script>
+import QRCode from 'qrcode'
 import LikeIcon from '../../components/LikeIcon'
+
 export default {
   name: 'QTopicDetails',
   components: {
@@ -70,6 +74,32 @@ export default {
           return
         }
         this.currentTopic = snapshot.val()
+      })
+    },
+    generateQr () {
+      console.log('qr generate', QRCode)
+
+      const opts = {
+        errorCorrectionLevel: 'H',
+        type: 'image/jpeg',
+        quality: 0.3,
+        margin: 1,
+        color: {
+          dark: '#222831',
+          light: '#FFF'
+        }
+      }
+
+      QRCode.toDataURL(window.location.href, opts, (err, qr) => {
+        if (err) { throw err }
+        this.$swal({
+          showCloseButton: true,
+          // html: '<img src="' + url + '" />'
+          imageUrl: qr,
+          imageWidth: 300,
+          imageHeight: 300,
+          imageAlt: 'QR Code'
+        })
       })
     },
     copyToClipboard () {

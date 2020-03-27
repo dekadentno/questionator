@@ -17,7 +17,9 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/style-resources": "^1.0.0",
     "firebase": "^7.12.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "qrcode": "^1.4.4",
+    "vue-sweetalert2": "^3.0.3"
   },
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.13.0",

@@ -45,7 +45,7 @@ export default {
   ],
   fontawesome: {
     icons: {
-      solid: ['faCopy', 'faPenAlt']
+      solid: ['faCopy', 'faPenAlt', 'faQrcode']
     }
   },
   /*
@@ -74,6 +74,13 @@ export default {
           analytics: true
         // auth: true // Just as example. Can be any other service.
         }
+      }
+    ],
+    [
+      'vue-sweetalert2/nuxt',
+      {
+        confirmButtonColor: '#41b882',
+        cancelButtonColor: '#ff7674'
       }
     ]
   ],
