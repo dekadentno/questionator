@@ -137,6 +137,16 @@ export default {
           content: q,
           votes: 0
         })
+        this.$swal({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          type: 'success',
+          title: 'Success',
+          icon: 'success',
+          text: 'Question posted!'
+        })
       }
     }
   }

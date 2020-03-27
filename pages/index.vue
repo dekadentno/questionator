@@ -27,12 +27,6 @@
 export default {
   name: 'QIndex',
   mounted () {
-    // FETCH ALL TOPICS
-    // const db = this.$fireDb.ref('topics')
-    // db.once('value').then((snapshot) => {
-    //   const topics = Object.values(snapshot.val())
-    //   console.log('topics: ', topics);
-    // })
   },
   methods: {
     joinTopic () {
