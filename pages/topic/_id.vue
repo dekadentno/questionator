@@ -7,7 +7,7 @@
       <h2>
         {{ currentTopic.name }}
         <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
-        <font-awesome-icon class="copy-url" title="qr" icon="qrcode" @click="generateQr" />
+        <font-awesome-icon class="copy-url" title="Click to show QR code" icon="qrcode" @click="generateQr" />
       </h2>
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <div class="question-card__content">
@@ -77,8 +77,6 @@ export default {
       })
     },
     generateQr () {
-      console.log('qr generate', QRCode)
-
       const opts = {
         errorCorrectionLevel: 'H',
         type: 'image/jpeg',
