@@ -26,7 +26,6 @@
 <script>
 export default {
   name: 'QIndex',
-  transition: 'bounce',
   mounted () {},
   methods: {
     joinTopic () {
@@ -35,7 +34,20 @@ export default {
     startTopic () {
       this.$router.push('/create')
     }
-  }
+  },
+  head () {
+    return {
+      title: 'Questionator',
+      meta: [
+        { name: 'google-site-verification', content: 'yom_ABTiOikF2MO2jhh4zlbJl7ezmrYNdNxEoibVOaU' },
+        { hid: 'description', name: 'description', content: 'Questionator is and app for opening topics and asking questions' }
+      ],
+      noscript: [
+        { innerHTML: 'Body No Scripts', body: true }
+      ]
+    }
+  },
+  transition: 'bounce'
 }
 </script>
 

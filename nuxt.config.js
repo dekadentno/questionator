@@ -57,7 +57,8 @@ export default {
   */
   modules: [
     '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     [

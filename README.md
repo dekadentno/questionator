@@ -31,8 +31,6 @@ As a participant (regular user), I want to be able...
 
 ## Todos
 
-- responsive :(
-- seo
 - write some kind of use policy?
 - refactor in vue 3, leave vue 2 implementation in separate branch
 - think of a way how to purge old unused topics
