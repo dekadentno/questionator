@@ -39,7 +39,6 @@ export default {
     return {
       title: 'Questionator',
       meta: [
-        { name: 'google-site-verification', content: 'yom_ABTiOikF2MO2jhh4zlbJl7ezmrYNdNxEoibVOaU' },
         { hid: 'description', name: 'description', content: 'Questionator is and app for opening topics and asking questions' }
       ],
       noscript: [
