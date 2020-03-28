@@ -157,7 +157,7 @@ export default {
         title: 'Enter your question',
         html: '<br/><input type="text" ref="questionRef" class="text-input question-input"/>',
         showCloseButton: true,
-        showCancelButton: true,
+        // showCancelButton: true,
         focusConfirm: false
       })
       const question = document.getElementsByClassName('question-input')[0].value // getting input value like this because we can't use v-model
@@ -227,6 +227,9 @@ export default {
   }
 }
 
+.question-input {
+  width: 90%;
+}
 .copy-url {
   cursor: pointer;
 }

@@ -1,6 +1,12 @@
 <template>
   <div class="create-topic base-wrap">
-    <input ref="topic" v-model="topic" placeholder="Enter your topic name" type="text" class="text-input">
+    <input
+      ref="topic"
+      v-model="topic"
+      placeholder="Enter your topic name"
+      type="text"
+      class="text-input"
+    >
     <div class="actions">
       <QButton :disabled="!topic" @click="createTopic">
         create topic
@@ -48,14 +54,20 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  max-width: 460px;
 
   .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     margin-top: 20px;
 
+    .btn:first-child {
+      margin-right: 10px;
+    }
     .btn {
-      margin: 0 10px;
+      width: 100%;
     }
   }
 }
-
 </style>

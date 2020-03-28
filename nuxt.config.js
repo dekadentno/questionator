@@ -31,7 +31,7 @@ export default {
   ],
   styleResources: {
     // scss: ['assets/scss/tools/_functions.scss', 'assets/scss/source/_colors.scss', 'assets/scss/source/_variables.scss', 'assets/scss/tools/_mixins.scss']
-    scss: []
+    scss: ['assets/scss/tools/_mixins.scss']
   },
   /*
   ** Plugins to load before mounting the App

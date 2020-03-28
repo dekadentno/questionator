@@ -1,5 +1,5 @@
 <template>
-  <div class="join-topic">
+  <div class="join-topic base-wrap">
     <input
       ref="topic"
       v-model="topicId"
@@ -45,12 +45,19 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  max-width: 460px;
 
   .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 20px;
 
+    .btn:first-child {
+      margin-right: 10px;
+    }
     .btn {
-      margin: 0 10px;
+      width: 100%;
     }
   }
 }

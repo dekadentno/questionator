@@ -1,43 +1,41 @@
-/*
-*
-* media query breakpoint generator
-*
-*/
-$breakpoints: ("w400": 400px,
-  "w480": 480px,
-  "w560": 560px,
-  "w640": 640px,
-  "w768": 768px,
-  "w992": 992px,
-  "w1200": 1200px,
-  "w1440": 1440px,
-  "w1600": 1600px,
-  "w1920": 1920px,
-  "w2160": 2160px,
-  "w2560": 2560px);
-
-// usage:
-// @include mq(w1200) {
-//  // smth
-// }
+$tablet: 769px !default;
+$desktop: 960px !default;
+$widescreen: 1152px !default;
 
 
-@mixin mq($width, $type: min) {
-  @if map_has_key($breakpoints, $width) {
-    $width: map_get($breakpoints, $width);
-
-    @if $type==max {
-      $width: $width - 1px;
-    }
-
-    @media only screen and (#{$type}-width: calc-em($width)) {
-      @content;
-    }
+// Responsiveness
+@mixin from($device) {
+  @media screen and (min-width: $device) {
+    @content;
   }
+}
 
-  // If the key doesn't exist in the map
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-    +"Please make sure it is defined in `$breakpoints` map.";
+@mixin until($device) {
+  @media screen and (max-width: $device - 1px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $tablet - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $tablet), print {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin widescreen {
+  @media screen and (min-width: $widescreen) {
+    @content;
   }
 }

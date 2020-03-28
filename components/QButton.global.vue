@@ -68,6 +68,10 @@ export default {
   text-transform: uppercase;
   width: 220px;
 
+  @include mobile {
+    width: auto;
+  }
+
   &--primary {
     color: #222831;
     background: #29a19c;

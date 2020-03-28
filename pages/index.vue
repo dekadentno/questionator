@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container base-wrap">
     <!-- what do you wanna do? -->
     <!-- https://codepen.io/rafaelavlucas/pen/rQWJYG -->
     <div class="cards-container">
@@ -27,8 +27,7 @@
 export default {
   name: 'QIndex',
   transition: 'bounce',
-  mounted () {
-  },
+  mounted () {},
   methods: {
     joinTopic () {
       this.$router.push('/join')
@@ -52,12 +51,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 .card {
   width: 100%;
-  max-width: 300px;
-  min-width: 200px;
-  height: 250px;
+  max-width: 280px;
+  min-width: 180px;
+  height: 230px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
@@ -71,6 +75,41 @@ export default {
   flex-direction: column;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  &:hover {
+    height: 270px;
+    .card__desc {
+      transition: all 0.3s ease;
+      opacity: 1;
+      max-height: 40px;
+    }
+  }
+
+  @include mobile {
+    height: 250px;
+    .card__desc {
+      transition: all 0.3s ease;
+      opacity: 1;
+      max-height: 40px;
+    }
+  }
+
+  @include tablet {
+    height: 250px;
+    .card__desc {
+      transition: all 0.3s ease;
+      opacity: 1;
+      max-height: 40px;
+    }
+  }
+
+  @include desktop {
+    height: 230px;
+    .card__desc {
+      opacity: 0;
+      max-height: 0;
+    }
+  }
 
   &__title {
     width: 100%;
@@ -96,15 +135,6 @@ export default {
     opacity: 0;
     max-height: 0;
     transition: all 0.3s ease;
-  }
-
-  &:hover {
-    height: 270px;
-    .card__desc {
-      transition: all 0.3s ease;
-      opacity: 1;
-      max-height: 40px;
-    }
   }
 }
 </style>
