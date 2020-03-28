@@ -21,6 +21,7 @@
 <script>
 export default {
   name: 'QJoin',
+  transition: 'bounce',
   data () {
     return {
       topicId: ''

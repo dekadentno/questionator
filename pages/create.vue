@@ -15,6 +15,7 @@
 <script>
 export default {
   name: 'QCreate',
+  transition: 'bounce',
   data () {
     return {
       topic: '',

@@ -26,6 +26,7 @@
 <script>
 export default {
   name: 'QIndex',
+  transition: 'bounce',
   mounted () {
   },
   methods: {
