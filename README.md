@@ -27,7 +27,6 @@ As a participant (regular user), I want to be able...
 ## Todos
 
 - responsive :(
-- disabled upvote button
 - seo
 
 - refactor in vue 3, leave vue 2 implementation in separate branch

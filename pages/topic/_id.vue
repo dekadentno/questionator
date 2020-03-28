@@ -4,7 +4,6 @@
       Topic doesn't exist. You will be redirrected shortly.
     </template>
     <template v-if="!isError && currentTopic">
-      <pre>{{ mappedQuestions }}</pre>
       <h2>
         {{ currentTopic.name }}
         <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
