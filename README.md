@@ -3,8 +3,11 @@
 Question asking app written in Nuxt.js. No registration required. .
 
 Color theme used from [here](https://colorhunt.co/palette/163836).
+
 Upvote (heart) button used from [here](https://codepen.io/jonitrythall/pen/myEpeV)
+
 Card hover effect inspired by [this pen](https://codepen.io/rafaelavlucas/pen/rQWJYG)
+
 
 ## User stories
 
