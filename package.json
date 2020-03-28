@@ -15,13 +15,20 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/firebase": "^5.0.3",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/robots": "^2.4.2",
+    "@nuxtjs/sitemap": "^2.1.0",
     "@nuxtjs/style-resources": "^1.0.0",
     "firebase": "^7.12.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "qrcode": "^1.4.4",
+    "vue-sweetalert2": "^3.0.3"
   },
   "devDependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/fontawesome": "^1.1.2",
+    "@nuxtjs/global-components": "^0.6.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",

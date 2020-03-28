@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container base-wrap">
     <!-- what do you wanna do? -->
     <!-- https://codepen.io/rafaelavlucas/pen/rQWJYG -->
     <div class="cards-container">
@@ -26,45 +26,7 @@
 <script>
 export default {
   name: 'QIndex',
-  mounted () {
-    // GET TOPIC BY ID
-    // const db = this.$fireDb.ref('topics').child('-LoC2FhOQiDedkV1BS9Y')
-
-    // FETCH ALL TOPICS
-    // const db = this.$fireDb.ref('topics')
-    // db.once('value').then((snapshot) => {
-    //   const topics = Object.values(snapshot.val())
-    //   console.log('topics: ', topics);
-    // })
-
-    // CREATE NEW TOPIC
-    // const rootRef = this.$fireDb.ref()
-    // const storesRef = rootRef.child('topics')
-    // const newStoreRef = storesRef.push()
-    // newStoreRef.set({
-    //   name: 'novi test2',
-    //   questions: []
-    // })
-    // console.log('---> ', newStoreRef) // dobivanje keya od kreiranog topica
-
-    // ADD QUESTION TO TOPIC BY ID
-    // const db = this.$fireDb.ref('topics/-M3CxHFdMyTOKOU4aKsl')
-    // const rootRef = this.$fireDb.ref()
-    // const storesRef = db.child('questions')
-    // console.log('storerev', storesRef)
-    // const newStoreRef = storesRef.push()
-    // newStoreRef.set({
-    //   content: 'najdraza boja?',
-    //   votes: 0
-    // })
-
-    // GET NUMBER OF VOTES (for increment)
-    // const db = this.$fireDb.ref('topics/-M3CxHFdMyTOKOU4aKsl/questions/-M3DBN5CRtNT73G_z8Lu')
-    // db.once('value').then((snapshot) => {
-    //   const obj = snapshot.val()
-    //   // console.log('num of votes: ', obj.votes)
-    // })
-  },
+  mounted () {},
   methods: {
     joinTopic () {
       this.$router.push('/join')
@@ -72,28 +34,45 @@ export default {
     startTopic () {
       this.$router.push('/create')
     }
-  }
+  },
+  head () {
+    return {
+      title: 'Questionator',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Questionator is and app for opening topics and asking questions' }
+      ],
+      noscript: [
+        { innerHTML: 'Body No Scripts', body: true }
+      ]
+    }
+  },
+  transition: 'bounce'
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 .cards-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 .card {
   width: 100%;
-  max-width: 300px;
-  min-width: 200px;
-  height: 250px;
+  max-width: 280px;
+  min-width: 180px;
+  height: 230px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
@@ -107,6 +86,41 @@ export default {
   flex-direction: column;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  &:hover {
+    height: 270px;
+    .card__desc {
+      transition: all 0.3s ease;
+      opacity: 1;
+      max-height: 40px;
+    }
+  }
+
+  @include mobile {
+    height: 250px;
+    .card__desc {
+      transition: all 0.3s ease;
+      opacity: 1;
+      max-height: 40px;
+    }
+  }
+
+  @include tablet {
+    height: 250px;
+    .card__desc {
+      transition: all 0.3s ease;
+      opacity: 1;
+      max-height: 40px;
+    }
+  }
+
+  @include desktop {
+    height: 230px;
+    .card__desc {
+      opacity: 0;
+      max-height: 0;
+    }
+  }
 
   &__title {
     width: 100%;
@@ -128,18 +142,10 @@ export default {
     color: white;
     font-weight: 200;
     letter-spacing: 2px;
+    line-height: 1.8;
     opacity: 0;
     max-height: 0;
     transition: all 0.3s ease;
-  }
-
-  &:hover {
-    height: 270px;
-    .card__desc {
-         transition: all 0.3s ease;
-   opacity: 1;
-   max-height:40px;
-    }
   }
 }
 </style>

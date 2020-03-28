@@ -1,41 +1,47 @@
 <template>
-  <div class="create-topic">
-    <input ref="topic" v-model="topic" type="text" class="text-input">
+  <div class="create-topic base-wrap">
+    <input
+      ref="topic"
+      v-model="topic"
+      placeholder="Enter your topic name"
+      type="text"
+      class="text-input"
+    >
     <div class="actions">
-      <button class="btn btn--primary" @click="createTopic">
+      <QButton :disabled="!topic" @click="createTopic">
         create topic
-      </button>
-      <button class="btn btn--secondary" @click="goHome">
-        back
-      </button>
+      </QButton>
+      <QButton type="secondary" @click="goHome">
+        go back
+      </QButton>
     </div>
   </div>
 </template>
 
 <script>
-/**
- * check if already exists
- * if exists, tell user so he can choose:
- * pick a new name or
- * make topic with random id
- */
 export default {
   name: 'QCreate',
+  transition: 'bounce',
   data () {
     return {
-      topic: ''
+      topic: '',
+      isLoading: false
     }
   },
   methods: {
     goHome () {
       this.$router.push('/')
     },
-    createTopic () {
-      // console.log('creating topic!')
-      // get name from v model
-      // create new topic in db
-      // route change to topic details with new db item id
-      this.$router.push('/topic/1') // hardcoded
+    async createTopic () {
+      this.isLoading = true
+      const dbRef = this.$fireDb.ref().child('topics')
+      const newStoreRef = dbRef.push()
+      await newStoreRef.set({
+        name: this.topic,
+        questions: []
+      })
+      this.$router.push('/topic/' + newStoreRef.key)
+      this.isLoading = false
     }
   }
 }
@@ -48,14 +54,20 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  max-width: 460px;
 
   .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     margin-top: 20px;
 
+    .btn:first-child {
+      margin-right: 10px;
+    }
     .btn {
-      margin: 0 10px;
+      width: 100%;
     }
   }
 }
-
 </style>

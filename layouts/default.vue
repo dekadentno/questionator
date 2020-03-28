@@ -31,7 +31,19 @@
     <nuxt />
   </div>
 </template>
+<script>
+export default {
+  head () {
+    return {
+      title: 'Questionator'
+    }
+  }
+}
+</script>
+export default {
 
+}
+</script>
 <style lang="scss" scoped>
 .github-corner:hover .octo-arm {
   animation: octocat-wave 560ms ease-in-out;
