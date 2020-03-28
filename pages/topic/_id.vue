@@ -4,6 +4,7 @@
       Topic doesn't exist. You will be redirrected shortly.
     </template>
     <template v-if="!isError && currentTopic">
+      <pre>{{ mappedQuestions }}</pre>
       <h2>
         {{ currentTopic.name }}
         <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
@@ -12,7 +13,7 @@
       <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
         <div class="question-card__content">
           <p>{{ q.content }}</p>
-          <LikeIcon :key="key" @click="upvoteQuestion(q)" />
+          <LikeIcon :key="key" :selected="q.isUpvoted" @click="!q.isUpvoted && upvoteQuestion(q)" />
         </div>
         <span class="question-card__votes">
           {{ q.votes }} votes
@@ -46,19 +47,23 @@ export default {
       if (!this.currentTopic || !this.currentTopic.questions) { return [] }
       const questions = this.currentTopic.questions
       const mapped = []
+      const upvotedQuestions = JSON.parse(localStorage.getItem(this.$route.params.id))
       for (const q in questions) {
         mapped.push({
           id: q,
           content: questions[q].content,
-          votes: questions[q].votes
+          votes: questions[q].votes,
+          isUpvoted: upvotedQuestions.includes(q)
         })
       }
-
       return mapped.sort((a, b) => b.votes - a.votes)
     }
   },
   mounted () {
     this.fetchQuestions()
+    if (!localStorage.getItem(this.$route.params.id)) {
+      localStorage.setItem(this.$route.params.id, JSON.stringify([]))
+    }
   },
   methods: {
     fetchQuestions () {
@@ -91,7 +96,6 @@ export default {
         if (err) { throw err }
         this.$swal({
           showCloseButton: true,
-          // html: '<img src="' + url + '" />'
           imageUrl: qr,
           imageWidth: 300,
           imageHeight: 300,
@@ -139,9 +143,14 @@ export default {
         }
       }
     },
-    async upvoteQuestion (q) {
-      await this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + q.id).update({
-        votes: q.votes + 1
+    upvoteQuestion (question) {
+      // set upvoted question id into local storage
+      // settin to LS before updating in firebase is a hacky way to implement this, but I yet didn't find a better solution
+      const upvoted = JSON.parse(localStorage.getItem(this.$route.params.id))
+      upvoted.push(question.id)
+      localStorage.setItem(this.$route.params.id, JSON.stringify([...new Set(upvoted)]))
+      this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + question.id).update({
+        votes: question.votes + 1
       })
     },
     async openQuestionModal () {

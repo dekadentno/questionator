@@ -1,6 +1,6 @@
 <template>
   <div class="heart-holder" @click="handleClick">
-    <div data-icon-hook class="like-icon" :class="{ 'start' : isSelected }">
+    <div data-icon-hook class="like-icon" :class="{ 'start' : selected }">
       <svg class="heart-icon" width="60" height="55" viewBox="0 0 90 85">
         <path
           class="love"
@@ -28,15 +28,15 @@ export default {
   },
   data () {
     return {
-      isSelected: false
+      // isSelected: false
     }
   },
   mounted () {
-    this.isSelected = this.selected
+    // this.isSelected = this.selected
   },
   methods: {
     handleClick () {
-      this.isSelected = !this.isSelected
+      // this.isSelected = !this.isSelected
       this.$emit('click')
     }
   }
