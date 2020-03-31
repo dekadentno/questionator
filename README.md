@@ -4,6 +4,8 @@ Question asking app written in Nuxt.js. Free, open source and no registration re
 Questionator is meant to provide easier participation on meetings, conferences, workshops etc. 
 Speakers will open new topics in Questionator and share the topic ID, topic URL or topic QR code to participants. When a certain topic is accessed, questions can be posted (anonymously) and upvoted, so that questions with more votes will go closer to the top of the list. It is not unfamiliar that IT people and geeks are mostly introverted and shy, so raising hands in a big crowded conference room can be discouraging. What if my question is dumb? What if my question has been already answered? What if my question is simply not good enough? These questions will no longer be an issue with Questionator.
 
+Link: https://questionator.netlify.com/
+
 Color theme used from [here](https://colorhunt.co/palette/163836).
 
 Upvote (heart) button used from [here](https://codepen.io/jonitrythall/pen/myEpeV)
