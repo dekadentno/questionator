@@ -6,17 +6,31 @@
     <template v-if="!isError && currentTopic">
       <h2>
         {{ currentTopic.name }}
-        <font-awesome-icon class="copy-url" title="Click to topic url" icon="copy" @click="copyToClipboard" />
-        <font-awesome-icon class="copy-url" title="Click to show QR code" icon="qrcode" @click="generateQr" />
+        <font-awesome-icon
+          class="copy-url"
+          title="Click to topic url"
+          icon="copy"
+          @click="copyToClipboard"
+        />
+        <font-awesome-icon
+          class="copy-url"
+          title="Click to show QR code"
+          icon="qrcode"
+          @click="generateQr"
+        />
       </h2>
-      <div v-for="(q, key) in mappedQuestions" :key="key" class="question-card">
-        <div class="question-card__content">
-          <p>{{ q.content }}</p>
-          <LikeIcon :key="key" :selected="q.isUpvoted" @click="!q.isUpvoted && upvoteQuestion(q)" />
+      <div is="transition-group" name="fade-list" class="question-container">
+        <div v-for="(q, key) in mappedQuestions" :key="q.id" class="question-card">
+          <div class="question-card__content">
+            <p>{{ q.content }}</p>
+            <LikeIcon
+              :key="key"
+              :selected="q.isUpvoted"
+              @click="!q.isUpvoted && upvoteQuestion(q)"
+            />
+          </div>
+          <span class="question-card__votes">{{ q.votes }} votes</span>
         </div>
-        <span class="question-card__votes">
-          {{ q.votes }} votes
-        </span>
       </div>
       <QButton type="levitate" @click="openQuestionModal">
         <font-awesome-icon title="Post new question" icon="pen-alt" />
@@ -43,10 +57,14 @@ export default {
   },
   computed: {
     mappedQuestions () {
-      if (!this.currentTopic || !this.currentTopic.questions) { return [] }
+      if (!this.currentTopic || !this.currentTopic.questions) {
+        return []
+      }
       const questions = this.currentTopic.questions
       const mapped = []
-      const upvotedQuestions = JSON.parse(localStorage.getItem(this.$route.params.id))
+      const upvotedQuestions = JSON.parse(
+        localStorage.getItem(this.$route.params.id)
+      )
       for (const q in questions) {
         mapped.push({
           id: q,
@@ -67,7 +85,9 @@ export default {
   methods: {
     fetchQuestions () {
       const topicId = this.$route.params.id
-      if (!topicId) { return }
+      if (!topicId) {
+        return
+      }
       this.$fireDb.ref('topics/' + topicId).on('value', (snapshot) => {
         if (!snapshot || !snapshot.val()) {
           this.isError = true
@@ -92,7 +112,9 @@ export default {
       }
 
       QRCode.toDataURL(window.location.href, opts, (err, qr) => {
-        if (err) { throw err }
+        if (err) {
+          throw err
+        }
         this.$swal({
           showCloseButton: true,
           imageUrl: qr,
@@ -107,8 +129,10 @@ export default {
       if (window.clipboardData && window.clipboardData.setData) {
         // IE specific code path to prevent textarea being shown while dialog is visible.
         return window.clipboardData.setData('Text', text)
-      } else if (document.queryCommandSupported && document.queryCommandSupported(
-        'copy')) {
+      } else if (
+        document.queryCommandSupported &&
+        document.queryCommandSupported('copy')
+      ) {
         const textarea = document.createElement('textarea')
         textarea.textContent = text
         textarea.style.position = 'fixed' // Prevent scrolling to bottom of page in MS Edge.
@@ -147,21 +171,34 @@ export default {
       // settin to LS before updating in firebase is a hacky way to implement this, but I yet didn't find a better solution
       const upvoted = JSON.parse(localStorage.getItem(this.$route.params.id))
       upvoted.push(question.id)
-      localStorage.setItem(this.$route.params.id, JSON.stringify([...new Set(upvoted)]))
-      this.$fireDb.ref('topics/' + this.$route.params.id + '/questions/' + question.id).update({
-        votes: question.votes + 1
-      })
+      localStorage.setItem(
+        this.$route.params.id,
+        JSON.stringify([...new Set(upvoted)])
+      )
+      this.$fireDb
+        .ref('topics/' + this.$route.params.id + '/questions/' + question.id)
+        .update({
+          votes: question.votes + 1
+        })
     },
     async openQuestionModal () {
       const result = await this.$swal({
         title: 'Enter your question',
-        html: '<br/><input type="text" ref="questionRef" class="text-input question-input"/>',
+        html:
+          '<br/><input type="text" autofocus ref="questionRef" class="text-input question-input"/>',
         showCloseButton: true,
         // showCancelButton: true,
-        focusConfirm: false
+        focusConfirm: false,
+        onRender: () => {
+          this.$nextTick(() => {
+            document.getElementsByClassName('text-input')[0].focus()
+          })
+        }
       })
-      const question = document.getElementsByClassName('question-input')[0].value // getting input value like this because we can't use v-model
-      if (result.value && question) { // if clicked OK
+      const question = document.getElementsByClassName('question-input')[0]
+        .value // getting input value like this because we can't use v-model
+      if (result.value && question) {
+        // if clicked OK
         const db = this.$fireDb.ref('topics/' + this.$route.params.id)
         const storesRef = db.child('questions')
         const newStoreRef = storesRef.push()
@@ -198,31 +235,37 @@ export default {
     margin: 50px 0;
   }
 
-  .question-card {
-    padding: 20px 30px;
-    border: none;
-    font-size: 16px;
-    line-height: 1.4;
-    border-radius: 4px;
-    width: 70%;
-    border: 1px solid #29a19c;
-    margin: 30px;
-    position: relative;
-    &__content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .question-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-      p {
-        max-width: 88%;
-        word-break: break-all;
+    .question-card {
+      padding: 20px 30px;
+      border: none;
+      font-size: 16px;
+      line-height: 1.4;
+      border-radius: 4px;
+      width: 70%;
+      border: 1px solid #29a19c;
+      margin: 30px;
+      position: relative;
+      &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+          max-width: 88%;
+          word-break: break-all;
+        }
       }
-    }
-    &__votes {
-      position: absolute;
-      right: 4px;
-      bottom: 2px;
-
+      &__votes {
+        position: absolute;
+        right: 4px;
+        bottom: 2px;
+      }
     }
   }
 }
@@ -232,5 +275,43 @@ export default {
 }
 .copy-url {
   cursor: pointer;
+}
+
+.fade-list-move {
+  transition: transform 0.25s ease;
+}
+
+.fade-list-leave-to {
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.fade-list-enter {
+  opacity: 0;
+  transform: scale(0.7);
+}
+.fade-list-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+.fade-list-enter-active {
+  transition: all 0.4s ease;
+}
+
+.fade-list-leave {
+  opacity: 1;
+}
+.fade-list-leave-to {
+  opacity: 0;
+  // transform: scale(0.4);
+  transition: all 0.4s ease;
+  // position: absolute;
+}
+.fade-list-leave-active {
+  transition: all 0.4s ease;
+}
+
+.fade-list-move {
+  transition: transform 0.25s ease;
 }
 </style>

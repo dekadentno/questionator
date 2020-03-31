@@ -6,6 +6,7 @@
       placeholder="Enter your topic name"
       type="text"
       class="text-input"
+      @keyup="createTopic"
     >
     <div class="actions">
       <QButton :disabled="!topic" @click="createTopic">
@@ -28,11 +29,15 @@ export default {
       isLoading: false
     }
   },
+  mounted () {
+    this.$refs.topic.focus()
+  },
   methods: {
     goHome () {
       this.$router.push('/')
     },
-    async createTopic () {
+    async createTopic (e) {
+      console.log('---e', e)
       this.isLoading = true
       const dbRef = this.$fireDb.ref().child('topics')
       const newStoreRef = dbRef.push()
