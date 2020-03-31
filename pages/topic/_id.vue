@@ -185,10 +185,15 @@ export default {
       const result = await this.$swal({
         title: 'Enter your question',
         html:
-          '<br/><input type="text" ref="questionRef" class="text-input question-input"/>',
+          '<br/><input type="text" autofocus ref="questionRef" class="text-input question-input"/>',
         showCloseButton: true,
         // showCancelButton: true,
-        focusConfirm: false
+        focusConfirm: false,
+        onRender: () => {
+          this.$nextTick(() => {
+            document.getElementsByClassName('text-input')[0].focus()
+          })
+        }
       })
       const question = document.getElementsByClassName('question-input')[0]
         .value // getting input value like this because we can't use v-model

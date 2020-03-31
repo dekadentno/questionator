@@ -27,6 +27,9 @@ export default {
       topicId: ''
     }
   },
+  mounted () {
+    this.$refs.topic.focus()
+  },
   methods: {
     joinTopic () {
       this.$router.push('/topic/' + this.topicId)
