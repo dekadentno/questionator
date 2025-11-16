@@ -19,7 +19,7 @@
     "@nuxtjs/sitemap": "^2.1.0",
     "@nuxtjs/style-resources": "^1.0.0",
     "firebase": "^7.12.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.18.1",
     "qrcode": "^1.4.4",
     "vue-sweetalert2": "^3.0.3"
   },
@@ -30,7 +30,7 @@
     "@nuxtjs/fontawesome": "^1.1.2",
     "@nuxtjs/global-components": "^0.6.1",
     "babel-eslint": "^10.0.1",
-    "eslint": "^6.1.0",
+    "eslint": "^9.39.1",
     "eslint-plugin-nuxt": ">=0.4.2",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2"
